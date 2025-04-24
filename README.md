@@ -4,7 +4,7 @@ Projeto em **desenvolvimento** com foco em construção de uma API REST para ger
 
 ## 🚀 Tecnologias utilizadas
 
-- Java 17
+- Java 
 - Spring Boot
 - Banco de dados H2 (em memória)
 - Maven
