@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+//tabela de tasks
+
 @Data
 @Entity(name = "tb_tasks")
 public class TaskModel {
