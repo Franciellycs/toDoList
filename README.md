@@ -13,9 +13,9 @@ Projeto em **desenvolvimento** com foco em construção de uma API REST para ger
 ## 📌 Funcionalidades
 
 - ✅ Criar usuário ```done```
-- 🔐 Autenticação com JWT ```pendente```
+- 🔐 Autenticação com JWT ```done```
 - 📝 CRUD de tarefas ```em andamento```
-- 👤 Relacionamento entre usuários e tarefas ```pendente```
+- 👤 Relacionamento entre usuários e tarefas ```em andamento```
 
 ## 🛠️ Como executar
 
