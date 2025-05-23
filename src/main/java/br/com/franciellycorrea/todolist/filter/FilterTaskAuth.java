@@ -60,6 +60,8 @@ public class FilterTaskAuth extends OncePerRequestFilter {
                 // validando user
                 var user = this.userRepository.findByUsername(username);
 
+                
+
                 if (user == null) {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuário não encontrado");
                 } else {
@@ -77,6 +79,7 @@ public class FilterTaskAuth extends OncePerRequestFilter {
                 }
 
             } catch (Exception e) {
+                e.printStackTrace();
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Erro ao processar autenticação");
             }
 
@@ -84,5 +87,6 @@ public class FilterTaskAuth extends OncePerRequestFilter {
             // Continua filtragem para outras rotas
             filterChain.doFilter(request, response);
         }
+        
     }
 }

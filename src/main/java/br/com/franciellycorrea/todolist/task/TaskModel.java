@@ -32,13 +32,6 @@ public class TaskModel {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    public void setCurrentDate(LocalDateTime currentDate) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setCurrentDate'");
-    }
-    
-    
-
 
 
 }

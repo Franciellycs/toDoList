@@ -1,6 +1,7 @@
 package br.com.franciellycorrea.todolist.task;
 
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,10 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.franciellycorrea.todolist.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -21,12 +24,14 @@ import jakarta.servlet.http.HttpServletRequest;
 @SuppressWarnings("UnnecessaryReturnStatement")
 public class TaskController {
   
-    @Autowired
-    private ITaskRepository taskRepository;
+@Autowired
+private ITaskRepository taskRepository;
+
 @PostMapping("/")
 public ResponseEntity create(@RequestBody TaskModel taskModel, HttpServletRequest request) {
         var idUser = request.getAttribute("idUser");
         taskModel.setIdUser((UUID) idUser);
+        
 
         var currentDate = LocalDateTime.now();
 
@@ -51,13 +56,27 @@ public ResponseEntity create(@RequestBody TaskModel taskModel, HttpServletReques
         return tasks;   
         
     }
+//85171950-4665-4c76-b617-04b17b65c1ff
+    @PutMapping("/{id}") 
+    public ResponseEntity update(@RequestBody TaskModel taskModel, @PathVariable UUID id, HttpServletRequest request) {
 
-    @PostMapping("/{id}") 
-    public void update(@RequestBody TaskModel taskModel, HttpServletRequest request, @PathVariable UUID id) {
-        var idUser = request.getAttribute("idUser");
-        taskModel.setIdUser((UUID) idUser);
-        taskModel.setId(id);
-        this.taskRepository.save(taskModel);
+        var idUser = (UUID) request.getAttribute("idUser");
+
+        var task = this.taskRepository.findById(id).orElse(null);
         
+            if (task == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada.");
+            }
+
+            if (!task.getIdUser().equals(idUser)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você não tem permissão para alterar esta tarefa.");
+            }
+
+        Utils.copyNonNullProperties(taskModel, task);
+
+        
+        task = this.taskRepository.save(task);
+        return ResponseEntity.ok(task);
     }
+
 }
