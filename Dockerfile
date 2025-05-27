@@ -1,4 +1,4 @@
-FROM  ubuntu:lastest AS build
+FROM  ubuntu:latest AS build
 
 
 RUN apt-get update && apt-get install openjdk-22-jdk -y
