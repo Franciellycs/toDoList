@@ -1,6 +1,6 @@
 # 📋 ToDo List API – Java com Spring Boot
 
-Projeto em **desenvolvimento** com foco em construção de uma API REST para gerenciamento de tarefas (ToDo List), utilizando **Java** e **Spring Boot**.
+Projeto desenvolvido com foco em construção de uma API REST para gerenciamento de tarefas (ToDo List), utilizando **Java** e **Spring Boot**.
 
 ## 🚀 Tecnologias utilizadas
 
@@ -14,8 +14,8 @@ Projeto em **desenvolvimento** com foco em construção de uma API REST para ger
 
 - ✅ Criar usuário ```done```
 - 🔐 Autenticação com JWT ```done```
-- 📝 CRUD de tarefas ```em andamento```
-- 👤 Relacionamento entre usuários e tarefas ```em andamento```
+- 📝 CRUD de tarefas ```done```
+- 👤 Relacionamento entre usuários e tarefas ```done```
 
 ## 🛠️ Como executar
 
