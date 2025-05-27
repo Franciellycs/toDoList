@@ -1,15 +1,19 @@
-FROM  ubuntu:latest AS build
+# Etapa de build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
+WORKDIR /app
 
-RUN apt-get update && apt-get install openjdk-22-jdk -y
+COPY pom.xml .
+COPY src ./src
 
-COPY . .
+RUN mvn clean package -DskipTests
 
-RUN apt-get install maven -y
-RUN mvn clean install
+# Etapa final
+FROM eclipse-temurin:21-jdk-alpine
 
-FROM openjdk:21-jdk-slim
+WORKDIR /app
 EXPOSE 8080
 
-COPY --from=build /target/todolist-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/todolist-0.0.1-SNAPSHOT.jar app.jar
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
